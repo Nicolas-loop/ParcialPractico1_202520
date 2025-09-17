@@ -29,6 +29,19 @@ public class PlanetaService {
         log.info("Inicia proceso de creación del planeta");
 
         //Verificar la longitud del nombre
-        if (planetaEntity.getNombre())
-    }
+        int longitud = planetaEntity.getNombre().length();
+        String nombre = planetaEntity.getNombre();
+        if (nombre.equals(nombre)){
+            throw new IllegalOperationException("El nombre no puede terminas así");
+        }
+
+        if (planetaEntity.getPoblacion() < 0){
+            throw new IllegalOperationException("La población no puede ser negativa");
+
+        }
+
+        log.info("Termina proceso de creación");
+        return planetaRepository.save(planetaEntity);
+    }   
+
 }

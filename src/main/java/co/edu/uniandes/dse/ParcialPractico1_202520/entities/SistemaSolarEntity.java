@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.OneToMany;
+import lombok.Data;
 import uk.co.jemos.podam.common.PodamExclude;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 
+@Data
+@Entity
 public class SistemaSolarEntity extends BaseEntity {
 
     private String nombre;

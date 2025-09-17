@@ -9,6 +9,7 @@ import co.edu.uniandes.dse.ParcialPractico1_202520.entities.PlanetaEntity;
 
 @Repository
 public interface PlanetaRepository extends JpaRepository<PlanetaEntity, Long> {
+    List<PlanetaEntity> finById(Long PlanetaId);
     List<PlanetaEntity> findByNombre(String nombre);
     List<PlanetaEntity> findByPoblacion(int poblacion);
     List<PlanetaEntity> findByDiametro(long diametro);

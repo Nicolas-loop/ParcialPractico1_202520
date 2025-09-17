@@ -16,44 +16,28 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class SistemaSolarService {
+public class SistemaSolarPlanetaService {
     @Autowired
     private SistemaSolarRepository sistemaSolarRepository;
 
     @Autowired
     private PlanetaRepository planetaRepository;
 
-    private static final String[] regionesValidas = {"CORE", "MID_RIM", "OUTER_RIM", "COLONIES", "WILD_SPACE"};
 
     @Transactional
-    public addPlaneta createSistemaSolar(String nombreSistema, String nombrePlaneta) throws IllegalOperationException{
+    public SistemaSolarEntity addPlaneta(long sistemaSolarId, long planetaId) throws IllegalOperationException{
 
-        PlanetaEntity imagen = PlanetaEntity.get();
-        SistemaSolarEntity servicio = sistemaSolarEntity.get();
-        
-        //Validar que la imagen no esté ya asociada a otro servicio
-        if (imagen.getServicio() != null && !imagen.getServicio().getId().equals(servicioId)) {
-            throw new IllegalOperationException("La imagen ya está asociada a otro servicio");
+        Optional<SistemaSolarEntity> sistemaSolarEntity = sistemaSolarRepository.findById(sistemaSolarId);
+        Optional<PlanetaEntity> planetaEntity = planetaRepository.finById(planetaId);
+
+        PlanetaEntity planeta = planetaEntity.get();
+        SistemaSolarEntity sistemaSolar = sistemaSolarEntity.get();
+
+        planeta.setSistemaSolar(sistemaSolar);
+        if (!sistemaSolar.getPlanetas().contains(planeta)) {
+            sistemaSolar.getPlanetas().add(planeta);
         }
-        
-        //Validar que el servicio no tenga demasiadas imágenes
-        if (servicio.getImagenes() != null && servicio.getImagenes().size() >= 10) {
-            throw new IllegalOperationException("El servicio ya tiene el máximo de 10 imágenes permitidas");
-        }
-        
-        //Validar que la URL de la imagen sea válida
-        if (imagen.getUrl() == null || imagen.getUrl().trim().isEmpty()) {
-            throw new IllegalOperationException("La imagen debe tener una URL válida");
-        }
-        
-        //Asociar la imagen al servicio
-        imagen.setServicio(servicio);
-        if (!servicio.getImagenes().contains(imagen)) {
-            servicio.getImagenes().add(imagen);
-        }
-        
-        log.info("Termina proceso de asociar la imagen con id = {} al servicio con id = {}", imagenId, servicioId);
-        return imagen;
+        return sistemaSolar;
     }   
 
 }

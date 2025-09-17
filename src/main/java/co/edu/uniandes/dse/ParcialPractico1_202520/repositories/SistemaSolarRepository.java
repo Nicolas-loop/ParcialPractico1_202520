@@ -9,6 +9,7 @@ import co.edu.uniandes.dse.ParcialPractico1_202520.entities.SistemaSolarEntity;
 
 @Repository
 public interface SistemaSolarRepository extends JpaRepository<SistemaSolarEntity, Long> {   
+    List<SistemaSolarEntity> findById(long sistemaSolarId);
     List<SistemaSolarEntity> findByNombre(String nombre);
     List<SistemaSolarEntity> findByRegion(String region);
     List<SistemaSolarEntity> findByRatioMinimo(Long ratioMinimo);

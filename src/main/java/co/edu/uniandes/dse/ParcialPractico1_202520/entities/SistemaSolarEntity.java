@@ -8,18 +8,18 @@ import uk.co.jemos.podam.common.PodamExclude;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 
-public class SistemaSolar extends BaseEntity {
+public class SistemaSolarEntity extends BaseEntity {
 
     private String nombre;
     
     private String region;
 
-    private long ratio_minimo;
+    private long ratioMinimo;
 
-    private int num_stromtroopers;
+    private int numStromtroopers;
 
     @PodamExclude
     @OneToMany(mappedBy = "sistema", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PlanetaEntity> planetas;
+    private List<PlanetaEntity> planetas = new ArrayList<>();
 
 }
